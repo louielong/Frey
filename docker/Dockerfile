@@ -46,7 +46,7 @@ RUN cd /root && \
     cd esp-idf && \
     git checkout -b v3.2 && \
     echo 'export IDF_PATH=/root/esp-idf' >> /root/.bashrc && \
-    source /root/.bashrc && \
+    . /root/.bashrc && \
     pip install wheel && \
     python -m pip install --user -r $IDF_PATH/requirements.txt
 
