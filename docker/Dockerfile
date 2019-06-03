@@ -42,9 +42,8 @@ RUN cd /root && \
     tar xvf xtensa-esp32-elf-linux64.tar.gz -C /usr/share --remove-files && \
     rm xtensa-esp32-elf-linux64.tar.gz && \
     echo 'export PATH="/usr/share/xtensa-esp32-elf/bin:$PATH"'  >> /root/.bashrc && \
-    git clone --recursive https://github.com/espressif/esp-idf.git && \
+    git clone -b release/v3.2 --recursive https://github.com/espressif/esp-idf.git && \
     cd esp-idf && \
-    git checkout -b v3.2 && \
     echo 'export IDF_PATH=/root/esp-idf' >> /root/.bashrc && \
     . /root/.bashrc && \
     pip install wheel && \
