@@ -3,11 +3,12 @@ From ubuntu:16.04
 MAINTAINER Louie Long <longyu805@163.com>
 LABEL version="0.1" description="esp32 build environment based on ubuntu 16.04"
 
-# 使用网易源
-RUN  sed -i s@/archive.ubuntu.com/@/mirrors.163.com/@g /etc/apt/sources.list
+# 使用网易源, 国内build时加速
+#RUN  sed -i s@/archive.ubuntu.com/@/mirrors.163.com/@g /etc/apt/sources.list
 
 # 添加颜色显示
-RUN echo "alias ls='ls --color=auto'" >> /root/.bashrc
+RUN echo "alias ls='ls --color=auto'" >> /root/.bashrc && \
+    echo "set nu" > /root/.vimrc
 
 # 使用ubuntu安装必要的软件
 # https://docs.espressif.com/projects/esp-idf/zh_CN/latest/get-started/linux-setup.html
@@ -42,7 +43,7 @@ RUN cd /root && \
     tar xvf xtensa-esp32-elf-linux64.tar.gz -C /usr/share --remove-files && \
     rm xtensa-esp32-elf-linux64.tar.gz && \
     echo 'export PATH="/usr/share/xtensa-esp32-elf/bin:$PATH"'  >> /root/.bashrc && \
-    git clone -b release/v3.2 --recursive https://github.com/espressif/esp-idf.git && \
+    git clone -b release/v3.2 --depth 1 --recursive https://github.com/espressif/esp-idf.git && \
     cd esp-idf && \
     echo 'export IDF_PATH=/root/esp-idf' >> /root/.bashrc && \
     . /root/.bashrc && \
